@@ -33,3 +33,5 @@ dependencies {
     // instrumental test framework
     androidTestImplementation 'com.github.grishberg:annotationprinter:0.1.1'
 }
+
+apply from: "emulators_config.gradle"

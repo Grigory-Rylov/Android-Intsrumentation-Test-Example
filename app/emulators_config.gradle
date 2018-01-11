@@ -1,0 +1,15 @@
+// configurations for emulators, you can add several emulators : test_phone, test_tablet, e.t.c.
+emulatorConfigs {
+    test_phone {
+        name = "test_phone"
+        displayWidth = 768
+        displayHeight = 1280
+        displayDensity = 320
+        apiLevel = 26
+        diskSize = 2048
+    }
+}
+
+emulatorManagerConfig {
+    waitingTimeout = 60 * 3 * 1000
+}
