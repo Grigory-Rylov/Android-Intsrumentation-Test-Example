@@ -1,0 +1,7 @@
+instrumentalPluginConfig {
+    flavorName = 'debug'
+    instrumentalPackage = 'com.github.grishberg.instrumentaltestsample.test'
+    applicationId = 'com.github.grishberg.instrumentaltestsample'
+    instrumentalRunner = 'android.support.test.runner.AndroidJUnitRunner'
+    coverageEnabled = true
+}

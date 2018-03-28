@@ -2,6 +2,7 @@ import com.github.grishberg.instrumentaltestsample.RunTestPlugin
 
 apply plugin: 'com.android.application'
 apply plugin: 'com.github.grishberg.androidemulatormanager'
+apply plugin: 'com.github.grishberg.instrumentalplugin'
 apply plugin: RunTestPlugin
 
 android {
@@ -31,7 +32,8 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
     // instrumental test framework
-    androidTestImplementation 'com.github.grishberg:annotationprinter:0.1.1'
+    androidTestImplementation 'com.github.grishberg:annotationprinter:0.2.4'
 }
 
 apply from: "emulators_config.gradle"
+apply from: "instrumental_config.gradle"
