@@ -4,4 +4,6 @@ instrumentalPluginConfig {
     applicationId = 'com.github.grishberg.instrumentaltestsample'
     instrumentalRunner = 'android.support.test.runner.AndroidJUnitRunner'
     coverageEnabled = true
+    makeScreenshotsWhenFail = true
+    saveLogcat = true
 }
