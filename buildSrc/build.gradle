@@ -9,7 +9,7 @@ dependencies {
     compile 'com.android.tools.build:gradle:3.0.1'
 
     compile 'com.github.grishberg:android-emulator-manager:0.3.18'
-    compile 'com.github.grishberg:android-instrumental-test-runner:0.9.6'
+    compile 'com.github.grishberg:android-instrumental-test-runner:0.9.10'
 }
 
 dependencies {

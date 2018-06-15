@@ -23,15 +23,20 @@ class RunTestPlugin implements Plugin<Project> {
          */
         def installApkTask = project.tasks.create("installApk") {
             dependsOn('installDebug', 'installDebugAndroidTest')
-            finalizedBy(stopEmulatorsTask, testTask)
+            finalizedBy(/*stopEmulatorsTask,*/ testTask)
             mustRunAfter createAndRunEmulatorsTask
+
+            doLast {
+                println 'init instrumental task'
+                testTask.instrumentationArgsProvider = new ArgsProvider(project.logger);
+            }
         }
 
         /**
          * Starts creating emulators and running instrumental tests.
          */
         project.tasks.create("startConnectedTest") {
-            finalizedBy createAndRunEmulatorsTask
+            //finalizedBy createAndRunEmulatorsTask
             finalizedBy installApkTask
             finalizedBy 'assembleDebug'
             finalizedBy 'assembleAndroidTest'

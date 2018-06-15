@@ -2,6 +2,8 @@
     <string name="app_name">Instrumental Test Sample</string>
     <string name="button_for_phone">button for phone</string>
     <string name="button_for_tablet">button for tablet</string>
+    <string name="button_for_600dp">button for 600dp tablet</string>
     <string name="text_for_phone">You clicked phone button</string>
     <string name="text_for_tablet">You clicked tablet button</string>
+    <string name="text_for_600dp">You clicked 600dp tablet button</string>
 </resources>

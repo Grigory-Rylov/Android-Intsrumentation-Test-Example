@@ -1,10 +1,16 @@
 // configurations for emulators, you can add several emulators : test_phone, test_tablet, e.t.c.
 emulatorConfigs {
     test_phone {
-        name = "test_phone"
         displayWidth = 768
         displayHeight = 1280
         displayDensity = 320
+        apiLevel = 26
+        diskSize = 2048
+    }
+    test_tablet {
+        displayWidth = 768
+        displayHeight = 1280
+        displayDensity = 160
         apiLevel = 26
         diskSize = 2048
     }
