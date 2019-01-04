@@ -18,6 +18,9 @@ class RunTestPlugin implements Plugin<Project> {
         StopEmulatorsTask stopEmulatorsTask = project.tasks.findByName(StopEmulatorsTask.NAME)
         stopEmulatorsTask.mustRunAfter "connectedAndroidTest"
 
+        String projectName = project.name
+        testTask.setCommandProvider(new CustomCommandsProvider(projectName, project.logger))
+
         /**
          * Setup install apk and test apk
          */
@@ -28,7 +31,7 @@ class RunTestPlugin implements Plugin<Project> {
 
             doLast {
                 println 'init instrumental task'
-                testTask.instrumentationArgsProvider = new ArgsProvider(project.logger);
+                testTask.instrumentationArgsProvider = new ArgsProvider(project.logger)
             }
         }
 
