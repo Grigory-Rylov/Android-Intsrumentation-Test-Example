@@ -1,6 +1,7 @@
 package com.github.grishberg.instrumentaltestsample;
 
 import com.github.grishberg.tests.CommandsForAnnotationProvider;
+import com.github.grishberg.tests.planner.AnnotationInfo;
 import com.github.grishberg.tests.commands.DeviceRunnerCommand;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
 
 public class CommandsForAnnotationProviderImpl implements CommandsForAnnotationProvider {
     @Override
-    public List<DeviceRunnerCommand> provideCommand(List<String> annotation) {
+    public List<DeviceRunnerCommand> provideCommand(List<AnnotationInfo> annotation) {
         return null;
     }
 }
