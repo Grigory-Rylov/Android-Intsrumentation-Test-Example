@@ -32,7 +32,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     // instrumental test framework
-    androidTestImplementation 'com.github.grishberg:annotationprinter:1.0.0'
+    androidTestImplementation 'com.github.grishberg:annotationprinter:1.0.1'
 }
 
 apply from: "emulators_config.gradle"

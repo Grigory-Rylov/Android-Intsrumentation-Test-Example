@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     textView.setText(R.string.text_for_phone);
-                    System.exit(-1);
+                    // simulate process crash: System.exit(-1);
                 }
             });
         }
