@@ -78,7 +78,6 @@ instrumentalPluginConfig {
 ```
 
 5) add ```
-apply plugin: 'com.github.grishberg.androidemulatormanager'
 apply plugin: 'com.github.grishberg.instrumentalplugin'
 apply plugin: RunTestPlugin
 ```
