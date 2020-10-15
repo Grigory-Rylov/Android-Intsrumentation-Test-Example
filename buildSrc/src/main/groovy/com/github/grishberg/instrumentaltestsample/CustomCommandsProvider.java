@@ -46,7 +46,8 @@ public class CustomCommandsProvider implements DeviceRunnerCommandProvider {
                 .provideInstrumentalTests(device, args)
                 .provideCompoundTestPlan();
         SingleInstrumentalTestCommand command = new SingleInstrumentalTestCommand(
-                projectName, "pref", args, testPlanElements, new XmlReportDelegate());
+                projectName, "pref", args, testPlanElements, new XmlReportDelegate(),
+                SingleInstrumentalTestCommand.RetryHandler.NOOP);
         deviceRunnerCommands.add(command);
         return deviceRunnerCommands;
     }

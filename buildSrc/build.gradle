@@ -6,12 +6,11 @@ repositories {
     mavenLocal()
 }
 dependencies {
-    compile 'com.android.tools.build:gradle:3.0.1'
+    implementation 'com.android.tools.build:gradle:4.0.2'
 
-    compile 'com.github.grishberg:android-emulator-manager:0.3.18'
-    compile 'com.github.grishberg:android-instrumental-test-runner:1.5.1'
+    implementation 'com.github.grishberg:android-instrumental-test-runner:1.6.14'
 }
 
 dependencies {
-    compile gradleApi()
+    implementation gradleApi()
 }

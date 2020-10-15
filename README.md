@@ -6,22 +6,23 @@ Steps:
 
 2) create build.gradle in buildSrc module folder and put:
 
-```apply plugin: 'groovy'
-   
-   repositories {
-       google()
-       jcenter()
-       mavenLocal()
-   }
-   dependencies {
-       compile 'com.android.tools.build:gradle:3.0.1'
-   
-       compile 'com.github.grishberg:android-emulator-manager:0.3.8'
-   }
-   
-   dependencies {
-       compile gradleApi()
-   }
+```
+apply plugin: 'groovy'
+
+repositories {
+    google()
+    jcenter()
+    mavenLocal()
+}
+dependencies {
+    implementation 'com.android.tools.build:gradle:4.0.2'
+
+    implementation 'com.github.grishberg:android-instrumental-test-runner:1.6.14'
+}
+
+dependencies {
+    implementation gradleApi()
+}
 
 ```
 
@@ -31,56 +32,58 @@ Steps:
 ```
 package com.github.grishberg.instrumentaltestsample
 
-import com.github.grishberg.androidemulatormanager.CreateAndRunEmulatorsTask
-import com.github.grishberg.androidemulatormanager.DisplayMode
-import com.github.grishberg.androidemulatormanager.EmulatorConfig
-import com.github.grishberg.androidemulatormanager.ext.EmulatorManagerConfig
-import com.github.grishberg.androidemulatormanager.StopEmulatorsTask
+import com.github.grishberg.tests.InstrumentationTestTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
 class RunTestPlugin implements Plugin<Project> {
     @Override
     void apply(Project project) {
-        EmulatorManagerConfig emulatorsConfig = project.extensions.findByType(EmulatorManagerConfig)
-        CreateAndRunEmulatorsTask createAndRunEmulatorsTask = project.tasks.findByName(CreateAndRunEmulatorsTask.NAME)
-        StopEmulatorsTask stopEmulatorsTask = project.tasks.findByName(StopEmulatorsTask.NAME)
-        stopEmulatorsTask.mustRunAfter "connectedAndroidTest"
+        InstrumentationTestTask testTask = project.tasks.findByName(InstrumentationTestTask.NAME)
 
         /**
          * Setup install apk and test apk
          */
         def installApkTask = project.tasks.create("installApk") {
             dependsOn('installDebug', 'installDebugAndroidTest')
-            finalizedBy(stopEmulatorsTask, "connectedAndroidTest")
-            mustRunAfter createAndRunEmulatorsTask
+            doLast {
+                    println 'init instrumental task'
+            }
         }
 
         /**
-         * Starts creating emulators and running instrumental tests.
+         * Prepare builds and run instrumental tests.
          */
         project.tasks.create("startConnectedTest") {
-            finalizedBy createAndRunEmulatorsTask
             finalizedBy installApkTask
             finalizedBy 'assembleDebug'
             finalizedBy 'assembleAndroidTest'
-
-            doLast {
-                EmulatorConfig argPhone = new EmulatorConfig("test_phone", DisplayMode.PHONE_HDPI, 26)
-                argPhone.setDiskSize(2048)
-                EmulatorConfig[] configs = [argPhone]
-                emulatorsConfig.setEmulatorArgs(configs)
-                emulatorsConfig.setWaitingTimeout(60 * 3 * 1000)
-            }
+            finalizedBy testTask // or 'instrumentalTests'
         }
     }
 }
 ```
 
-5) add ```apply plugin: 'com.github.grishberg.androidemulatormanager'
-          apply plugin: RunTestPlugin```
-   to module build.gradle
-   
+6) create `instrumental_config.gradle` :
+```
+instrumentalPluginConfig {
+    flavorName = 'debug'
+    instrumentalPackage = 'com.github.grishberg.instrumentaltestsample.test' // your test package
+    applicationId = 'com.github.grishberg.instrumentaltestsample' // your appId
+    instrumentalRunner = 'androidx.test.runner.AndroidJUnitRunner' // your test runner
+    coverageEnabled = true // or false, if you don't need coverage
+    makeScreenshotsWhenFail = true // or false, if you don't need fail screenshots
+}
+
+```
+
+5) add ```
+apply plugin: 'com.github.grishberg.androidemulatormanager'
+apply plugin: 'com.github.grishberg.instrumentalplugin'
+apply plugin: RunTestPlugin
+```
+to module build.gradle
+
 6) Run with ```./gradlew startConnectedTest```
    
  
